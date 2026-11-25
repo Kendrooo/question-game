@@ -1,0 +1,126 @@
+{
+  "title": "Sample Question Deck",
+  "defaultWordCount": 10,
+  "rounds": [
+    {
+      "id": "round-001",
+      "wordCount": 10,
+      "phrase": "The quick brown fox jumps over the lazy dog today",
+      "answer": "A pangram containing all letters"
+    },
+    {
+      "id": "round-002",
+      "wordCount": 10,
+      "phrase": "To be or not to be that is the question",
+      "answer": "Shakespeare's Hamlet soliloquy"
+    },
+    {
+      "id": "round-003",
+      "wordCount": 10,
+      "phrase": "In the beginning was the word and the word was",
+      "answer": "Opening of the Gospel of John"
+    },
+    {
+      "id": "round-004",
+      "wordCount": 15,
+      "phrase": "It was the best of times it was the worst of times it was again",
+      "answer": "Opening line from A Tale of Two Cities"
+    },
+    {
+      "id": "round-005",
+      "wordCount": 10,
+      "phrase": "Four score and seven years ago our fathers brought forth",
+      "answer": "Opening of Lincoln's Gettysburg Address"
+    },
+    {
+      "id": "round-006",
+      "wordCount": 10,
+      "phrase": "Call me Ishmael Some years ago never mind how long",
+      "answer": "Opening line from Moby Dick"
+    },
+    {
+      "id": "round-007",
+      "wordCount": 10,
+      "phrase": "It is a truth universally acknowledged that a single man",
+      "answer": "Opening line from Pride and Prejudice"
+    },
+    {
+      "id": "round-008",
+      "wordCount": 10,
+      "phrase": "Happy families are all alike every unhappy family is different",
+      "answer": "Opening line from Anna Karenina"
+    },
+    {
+      "id": "round-009",
+      "wordCount": 10,
+      "phrase": "The sun was shining on the sea shining with all",
+      "answer": "Opening of The Walrus and the Carpenter"
+    },
+    {
+      "id": "round-010",
+      "wordCount": 11,
+      "phrase": "Once upon a time in a galaxy far far away there",
+      "answer": "Star Wars opening crawl reference"
+    },
+    {
+      "id": "round-011",
+      "wordCount": 11,
+      "phrase": "In a hole in the ground there lived a hobbit not",
+      "answer": "Opening line from The Hobbit"
+    },
+    {
+      "id": "round-012",
+      "wordCount": 10,
+      "phrase": "The man in black fled across the desert and the",
+      "answer": "Opening line from The Gunslinger"
+    },
+    {
+      "id": "round-013",
+      "wordCount": 11,
+      "phrase": "It was a bright cold day in April and the clocks",
+      "answer": "Opening line from 1984"
+    },
+    {
+      "id": "round-014",
+      "wordCount": 10,
+      "phrase": "The sky above the port was the color of television",
+      "answer": "Opening line from Neuromancer"
+    },
+    {
+      "id": "round-015",
+      "wordCount": 10,
+      "phrase": "Far out in the uncharted backwaters of the unfashionable west",
+      "answer": "Opening line from The Hitchhiker's Guide to the Galaxy"
+    },
+    {
+      "id": "round-016",
+      "wordCount": 10,
+      "phrase": "The primroses were over toward the edge of the wood",
+      "answer": "Opening line from Watership Down"
+    },
+    {
+      "id": "round-017",
+      "wordCount": 11,
+      "phrase": "The waystone inn lay in silence and it was a silence",
+      "answer": "Opening line from The Name of the Wind"
+    },
+    {
+      "id": "round-018",
+      "wordCount": 11,
+      "phrase": "The building was on fire and it was not my fault",
+      "answer": "Opening line from Blood Rites"
+    },
+    {
+      "id": "round-019",
+      "wordCount": 10,
+      "phrase": "The story so far in the beginning the universe was",
+      "answer": "Opening line from The Restaurant at the End of the Universe"
+    },
+    {
+      "id": "round-020",
+      "wordCount": 11,
+      "phrase": "It was a pleasure to burn it was a special pleasure",
+      "answer": "Opening line from Fahrenheit 451"
+    }
+  ]
+}

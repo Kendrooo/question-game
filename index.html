@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mystery Trivia - Host Screen</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-shell">
+        <div class="ambient ambient-left" aria-hidden="true"></div>
+        <div class="ambient ambient-right" aria-hidden="true"></div>
+
+        <header class="app-topbar">
+            <div class="brand-lockup">
+                <span class="brand-kicker">Host Console</span>
+                <h1 class="brand-title">Mystery Trivia</h1>
+                <p class="brand-subtitle">Run a fast-paced clue reveal round with game-night energy and cleaner host controls.</p>
+            </div>
+            <div class="theme-toggle-wrap">
+                <button id="theme-toggle-btn" class="btn btn-secondary theme-toggle-btn" type="button" aria-pressed="false">Light Mode</button>
+            </div>
+        </header>
+
+        <main class="app-main">
+            <div id="settings-screen" class="screen active">
+                <div class="screen-layout screen-layout-settings">
+                    <aside class="settings-stepper" aria-label="Setup steps">
+                        <ol class="stepper-list" id="setup-stepper">
+                            <li class="setup-step" data-step="1">
+                                <span class="step-marker">1</span>
+                                <div class="step-copy">
+                                    <span class="step-title">Shape the session</span>
+                                    <span class="step-meta">Set the game frame</span>
+                                </div>
+                            </li>
+                            <li class="setup-step" data-step="2">
+                                <span class="step-marker">2</span>
+                                <div class="step-copy">
+                                    <span class="step-title">Session setup</span>
+                                    <span class="step-meta">Tune the team list</span>
+                                </div>
+                            </li>
+                            <li class="setup-step" data-step="3">
+                                <span class="step-marker">3</span>
+                                <div class="step-copy">
+                                    <span class="step-title">Deck center</span>
+                                    <span class="step-meta">Import or build content</span>
+                                </div>
+                            </li>
+                            <li class="setup-step" data-step="4">
+                                <span class="step-marker">4</span>
+                                <div class="step-copy">
+                                    <span class="step-title">Build a custom round</span>
+                                    <span class="step-meta">Add questions and answers</span>
+                                </div>
+                            </li>
+                            <li class="setup-step" data-step="5">
+                                <span class="step-marker">5</span>
+                                <div class="step-copy">
+                                    <span class="step-title">Launch a round</span>
+                                    <span class="step-meta">Go live when ready</span>
+                                </div>
+                            </li>
+                        </ol>
+                    </aside>
+
+                    <div class="settings-stage-column">
+                        <section class="panel panel-hero">
+                            <div class="panel-header">
+                                <div>
+                                    <span class="eyebrow">Stage 1</span>
+                                    <h2>Shape The Session</h2>
+                                </div>
+                                <span class="status-pill status-pill-live">Ready to Host</span>
+                            </div>
+                            <p class="panel-copy">Set the round size, name your teams, and build the atmosphere before launching into play.</p>
+                            <div class="hero-metrics">
+                                <div class="stat-chip">
+                                    <span class="stat-label">Words / round</span>
+                                    <span class="stat-value" id="setup-word-count-stat">10</span>
+                                </div>
+                                <div class="stat-chip">
+                                    <span class="stat-label">Teams</span>
+                                    <span class="stat-value" id="setup-team-count-stat">2</span>
+                                </div>
+                                <div class="stat-chip">
+                                    <span class="stat-label">Deck rounds</span>
+                                    <span class="stat-value" id="setup-round-count-stat">—</span>
+                                    <span class="stat-meta" id="setup-round-count-help">Load a deck to see round count.</span>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section class="panel panel-session-setup">
+                            <div class="panel-header">
+                                <div>
+                                    <span class="eyebrow">Stage 2</span>
+                                    <h2>Session Setup</h2>
+                                </div>
+                            </div>
+                            <div class="field-grid">
+                                <div class="field-card">
+                                    <label class="field-label" for="word-count">Words per round</label>
+                                    <input type="number" id="word-count" min="10" max="30" value="10">
+                                    <p class="field-help">Every phrase must match this count unless a round overrides it.</p>
+                                </div>
+                            </div>
+
+                            <div class="subpanel">
+                                <div class="subpanel-header">
+                                    <div>
+                                        <span class="section-kicker">Teams</span>
+                                        <h3>Contestants</h3>
+                                    </div>
+                                    <button id="add-team-btn" class="btn btn-secondary" type="button">Add Team</button>
+                                </div>
+                                <div id="teams-list" class="team-list"></div>
+                            </div>
+                        </section>
+
+                        <section class="panel panel-deck-center">
+                            <div class="panel-header">
+                                <div>
+                                    <span class="eyebrow">Stage 3</span>
+                                    <h2>Deck Center</h2>
+                                </div>
+                            </div>
+                            <div class="button-group deck-controls">
+                                <button id="import-file-btn" class="btn btn-secondary" type="button">Import File</button>
+                                <button id="import-paste-btn" class="btn btn-secondary" type="button">Paste JSON</button>
+                                <button id="export-deck-btn" class="btn btn-ghost" type="button" disabled>Export Deck</button>
+                                <button id="load-sample-btn" class="btn btn-secondary" type="button">Load Sample Deck</button>
+                                <input type="file" id="file-input" accept=".json" hidden>
+                            </div>
+
+                            <div id="import-paste-area" class="subpanel import-paste-area" hidden>
+                                <div class="subpanel-header">
+                                    <div>
+                                        <span class="section-kicker">Import</span>
+                                        <h3>Paste a deck</h3>
+                                    </div>
+                                </div>
+                                <textarea id="paste-textarea" rows="8" placeholder="Paste deck JSON here..."></textarea>
+                                <div class="button-group">
+                                    <button id="paste-import-btn" class="btn btn-primary" type="button">Import Deck</button>
+                                    <button id="paste-cancel-btn" class="btn btn-ghost" type="button">Cancel</button>
+                                </div>
+                            </div>
+
+                            <div id="deck-status" class="status-banner" aria-live="polite"></div>
+                            <div id="deck-meta" class="meta-grid" aria-live="polite"></div>
+                            <div id="validation-errors" class="status-banner status-banner-error" hidden></div>
+                        </section>
+
+                        <div class="stage-row">
+                            <section class="panel panel-custom-round">
+                                <div class="panel-header panel-header-stage">
+                                    <div>
+                                        <span class="eyebrow">Stage 4</span>
+                                        <h2>Build A Custom Round</h2>
+                                    </div>
+                                </div>
+                                <div class="field-stack custom-round-form">
+                                    <div class="field-card">
+                                        <label class="field-label" for="custom-round-id">Round Name</label>
+                                        <input type="text" id="custom-round-id" placeholder="e.g. Pop Culture, 90s Movies, Science">
+                                        <p class="field-help">Name your round — you can have multiple rounds in a session.</p>
+                                    </div>
+                                    <div class="question-builder-layout">
+                                        <div class="field-stack question-editor-column">
+                                            <div class="field-card">
+                                                <div class="subpanel-header">
+                                                    <div>
+                                                        <span class="section-kicker">Question editor</span>
+                                                        <h3 id="custom-question-editor-title">Add a question</h3>
+                                                    </div>
+                                                </div>
+                                                <label class="field-label" for="custom-round-phrase">Phrase</label>
+                                                <textarea id="custom-round-phrase" rows="4" placeholder="Enter the phrase with the exact word count..."></textarea>
+                                                <div class="inline-status" id="custom-word-count-hint" aria-live="polite"></div>
+                                            </div>
+                                            <div class="field-card">
+                                                <label class="field-label" for="custom-round-answer">Answer</label>
+                                                <input type="text" id="custom-round-answer" placeholder="Enter the correct answer">
+                                                <button id="custom-round-advanced-toggle" class="btn btn-ghost advanced-toggle" type="button" aria-expanded="false" aria-controls="custom-round-advanced-panel">▸ Advanced options</button>
+                                                <div id="custom-round-advanced-panel" class="advanced-panel" hidden>
+                                                    <label class="field-label" for="custom-round-word-count">Word Count Override</label>
+                                                    <input type="number" id="custom-round-word-count" min="10" max="30" placeholder="Leave empty to use the session default">
+                                                </div>
+                                            </div>
+                                            <div class="custom-round-actions">
+                                                <div class="button-group custom-round-question-actions">
+                                                    <button id="add-custom-round-btn" class="btn btn-secondary" type="button">Add Question To Round</button>
+                                                    <button id="reset-custom-question-btn" class="btn btn-ghost" type="button">Clear Editor</button>
+                                                </div>
+                                                <div class="custom-round-save-actions">
+                                                    <button id="save-custom-round-btn" class="btn btn-primary" type="button" title="Add at least one question to save." disabled>Save Round</button>
+                                                    <p class="field-help" id="save-round-help">Add at least one question to save.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="field-card question-list-panel">
+                                            <div class="subpanel-header">
+                                                <div>
+                                                    <span class="section-kicker">Round questions</span>
+                                                    <h3>Draft question list</h3>
+                                                </div>
+                                                <span class="status-pill status-pill-count" id="custom-round-question-count">Questions Added: 0</span>
+                                            </div>
+                                            <div id="custom-round-question-list" class="question-list"></div>
+                                            <div id="custom-round-question-empty" class="empty-state empty-state-questions">
+                                                <div class="empty-state-icon" aria-hidden="true">✦</div>
+                                                <p>Questions you add will appear here. Save the round when you're done.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="custom-round-status" class="status-banner" aria-live="polite" hidden></div>
+                                </div>
+                            </section>
+
+                            <section class="panel panel-launch">
+                                <div class="panel-header panel-header-stage panel-header-launch">
+                                    <div class="launch-title-block">
+                                        <span class="eyebrow">Stage 5</span>
+                                        <h2>Launch A Round</h2>
+                                        <span class="status-pill launch-status-pill" id="launch-status-pill">Deck Needed</span>
+                                    </div>
+                                </div>
+                                <div class="launch-layout">
+                                    <div class="field-card">
+                                        <label class="field-label" for="round-select">Select round</label>
+                                        <select id="round-select" disabled title="Load a deck first.">
+                                            <option value="">No deck loaded</option>
+                                        </select>
+                                    </div>
+                                    <div class="launch-actions">
+                                        <button id="start-selected-btn" class="btn btn-primary" type="button" disabled title="Load a deck first.">Start Selected Round</button>
+                                        <button id="start-random-btn" class="btn btn-secondary" type="button" disabled title="Load a deck first.">Surprise Me</button>
+                                    </div>
+                                </div>
+                                <div class="round-preview-card compact-empty" id="round-preview" aria-live="polite">
+                                    <div class="round-preview-empty-shell">
+                                        <p>Load a deck first.</p>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+
+                        <section class="panel panel-danger-zone">
+                            <div class="panel-header">
+                                <div>
+                                    <span class="section-kicker section-kicker-danger">Danger Zone</span>
+                                    <h3>Reset saved setup</h3>
+                                </div>
+                            </div>
+                            <div class="danger-inline-group">
+                                <button id="clear-state-btn" class="btn btn-destructive" type="button">Clear Saved State</button>
+                                <div id="clear-state-confirmation" class="inline-confirmation" hidden>
+                                    <span class="inline-confirmation-copy">Are you sure? This cannot be undone.</span>
+                                    <div class="button-group inline-confirmation-actions">
+                                        <button id="confirm-clear-state-btn" class="btn btn-destructive" type="button">Confirm</button>
+                                        <button id="cancel-clear-state-btn" class="btn btn-ghost" type="button">Cancel</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+
+            <div id="game-screen" class="screen">
+                <div class="screen-layout screen-layout-game">
+                    <section class="panel panel-game-hero">
+                        <div class="panel-header">
+                            <div>
+                                <span class="eyebrow">Live Round</span>
+                                <h2 id="game-subtitle">Round in Progress</h2>
+                            </div>
+                            <button id="back-to-settings-btn" class="btn btn-secondary" type="button">Back To Settings</button>
+                        </div>
+                        <div class="hud-grid">
+                            <div class="hud-card hud-card-team">
+                                <span class="hud-label">Current Team</span>
+                                <span id="current-team-name" class="hud-value"></span>
+                            </div>
+                            <div class="hud-card">
+                                <span class="hud-label">Round</span>
+                                <span id="game-round-id" class="hud-value hud-value-small"></span>
+                            </div>
+                            <div class="hud-card">
+                                <span class="hud-label">Revealed</span>
+                                <span id="reveal-count" class="hud-value hud-value-small">0</span>
+                            </div>
+                            <div class="hud-card">
+                                <span class="hud-label">Remaining</span>
+                                <span id="remaining-count" class="hud-value hud-value-small">0</span>
+                            </div>
+                        </div>
+                        <div class="instruction-banner" id="turn-instruction" aria-live="polite"></div>
+                    </section>
+
+                    <div class="gameplay-layout">
+                        <section class="panel board-panel">
+                            <div class="panel-header">
+                                <div>
+                                    <span class="eyebrow">Board</span>
+                                    <h3>Reveal Grid</h3>
+                                </div>
+                                <div class="stat-chip compact">
+                                    <span class="stat-label">Progress</span>
+                                    <span class="stat-value" id="board-progress-label">0 / 0</span>
+                                </div>
+                            </div>
+                            <div class="progress-bar" aria-hidden="true">
+                                <span id="board-progress-bar"></span>
+                            </div>
+                            <div class="tiles-container">
+                                <div id="tiles-grid" class="tiles-grid"></div>
+                            </div>
+                        </section>
+
+                        <aside class="side-rail">
+                            <section class="panel">
+                                <div class="panel-header">
+                                    <div>
+                                        <span class="section-kicker">Guess</span>
+                                        <h3>Your guess</h3>
+                                    </div>
+                                </div>
+                                <div class="field-stack guess-section">
+                                    <div class="guess-turn-banner" id="guess-team-label">Team 1 is guessing</div>
+                                    <div class="guess-input-group">
+                                        <input type="text" id="guess-input" placeholder="Enter your guess..." disabled>
+                                        <button id="submit-guess-btn" class="btn btn-secondary" type="button" disabled>Lock Guess</button>
+                                    </div>
+                                    <p class="field-help" id="guess-help">Reveal a tile to unlock the guess box.</p>
+                                </div>
+                            </section>
+
+                            <section class="panel">
+                                <div class="panel-header">
+                                    <div>
+                                        <span class="section-kicker">Controls</span>
+                                        <h3>Host Tools</h3>
+                                    </div>
+                                </div>
+                                <div class="button-group tools-section">
+                                    <button id="undo-btn" class="btn btn-secondary" type="button" disabled>Undo</button>
+                                    <button id="reveal-all-btn" class="btn btn-secondary btn-power" type="button">Reveal All</button>
+                                    <button id="reset-round-btn" class="btn btn-destructive" type="button">Reset Round</button>
+                                </div>
+                                <div id="reset-round-confirmation" class="inline-confirmation inline-confirmation-panel" hidden>
+                                    <span class="inline-confirmation-copy">Are you sure? This cannot be undone.</span>
+                                    <div class="button-group inline-confirmation-actions">
+                                        <button id="confirm-reset-round-btn" class="btn btn-destructive" type="button">Confirm</button>
+                                        <button id="cancel-reset-round-btn" class="btn btn-ghost" type="button">Cancel</button>
+                                    </div>
+                                </div>
+                            </section>
+
+                            <section class="panel action-log-section">
+                                <div class="panel-header">
+                                    <div>
+                                        <span class="section-kicker">Timeline</span>
+                                        <h3>Timeline</h3>
+                                    </div>
+                                </div>
+                                <div id="action-log" class="action-log" aria-live="polite"></div>
+                                <div id="action-log-empty" class="empty-state">No actions yet. Reveal a tile to kick off the round.</div>
+                            </section>
+                        </aside>
+                    </div>
+                </div>
+            </div>
+
+            <div id="end-screen" class="screen">
+                <div class="screen-layout screen-layout-end">
+                    <section class="panel celebration-panel">
+                        <div class="confetti confetti-left" aria-hidden="true"></div>
+                        <div class="confetti confetti-right" aria-hidden="true"></div>
+                        <div class="panel-header centered">
+                            <div>
+                                <span class="eyebrow">Round Complete</span>
+                                <h2>Winner Locked In</h2>
+                            </div>
+                        </div>
+                        <div class="winner-display">
+                            <div class="winner-label">Winning Team</div>
+                            <div id="winner-name" class="winner-name"></div>
+                        </div>
+                        <div class="end-stats">
+                            <div class="stat-chip">
+                                <span class="stat-label">Round</span>
+                                <span class="stat-value" id="end-round-id">-</span>
+                            </div>
+                            <div class="stat-chip">
+                                <span class="stat-label">Tiles revealed</span>
+                                <span class="stat-value" id="end-reveal-count">0</span>
+                            </div>
+                        </div>
+                        <div class="answer-display">
+                            <div class="answer-label">Correct Answer</div>
+                            <div id="correct-answer" class="correct-answer"></div>
+                        </div>
+                        <div class="button-group end-buttons">
+                            <button id="next-round-btn" class="btn btn-primary" type="button">Next Round</button>
+                            <button id="replay-round-btn" class="btn btn-secondary" type="button">Replay Round</button>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </main>
+
+        <div id="toast-region" class="toast-region" aria-live="polite" aria-atomic="true"></div>
+
+        <div id="feedback-modal" class="modal-shell" hidden>
+            <div class="modal-backdrop" data-close-modal="feedback"></div>
+            <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="feedback-modal-title">
+                <div class="modal-header">
+                    <div>
+                        <span class="eyebrow">System Prompt</span>
+                        <h3 id="feedback-modal-title">Confirm Action</h3>
+                    </div>
+                </div>
+                <p class="modal-copy" id="feedback-modal-body"></p>
+                <div class="button-group modal-buttons">
+                    <button id="feedback-modal-confirm" class="btn btn-primary" type="button">Confirm</button>
+                    <button id="feedback-modal-cancel" class="btn btn-ghost" type="button">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
